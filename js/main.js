@@ -22,6 +22,8 @@ async function updateList() {
     .then((response) => response.json())
     .then((json) => {
       taskList.push(...json);
+      updateTable(taskList);
+      console.log(taskList);
     });
 }
 
@@ -42,11 +44,11 @@ function clearView() {
     '<div class="flex flex-column justify-center align-center h-100"><i class="fas fa-user-astronaut placeholder__icon"></i><p>Selecione ou crie uma tarefa...</p></div>';
 }
 
-function updateTable() {
+function updateTable(taskList) {
+  console.log(taskList);
   for (let task of taskList) {
     template = document.createElement("tr");
 
-    let tdID = document.createElement("td");
     let tdName = document.createElement("td");
     let tdStatus = document.createElement("td");
     let tdActions = parseHTML("<td></td >");
@@ -72,9 +74,6 @@ function updateTable() {
     tdActions.appendChild(deleteButton);
     tdActions.appendChild(viewButton);
 
-    tdID.innerText = task.id;
-
-    template.appendChild(tdID);
     template.appendChild(tdName);
     template.appendChild(tdStatus);
     template.appendChild(tdActions);
@@ -130,8 +129,7 @@ addButton.addEventListener("click", function () {
 
     clearView();
     updateList();
-    updateTable();
   });
 });
 
-updateList().then(updateTable());
+updateList();
