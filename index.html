@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocketeer</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Nobile:wght@700&family=Open+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nobile:wght@700&family=Open+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <header>
+        <h1>Rocketeer</h1>
+    </header>
+    <main class="container">
+        <section class="table-container flex flex-column justiffy-content-between card h-100">
+            <div>
+                <h2 class="tasks__title">Tarefas:</h2>
+                <form id="search-form" action="" class="flex justify-content-end">
+                    <input id="search-input" type="text" placeholder="busca">
+                    <button id="search-button" type="submit" class="button button--neumo button--secondary ml-2"><i
+                            class="fas fa-search"></i></button>
+                </form>
+
+            </div>
+
+            <table id="tasks">
+                <thead class="tasks__header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome da tarefa</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <div class="container__footer flex justify-content-between mt-auto">
+                <div class="pagination">
+                    <button id="previous-button" class="button button--neumo button--secondary"><i
+                            class="fas fa-caret-left"></i></button>
+                    <span class="page-indicator"> 1 </span>
+                    <button id="next-button" class="button button--neumo button--secondary"><i
+                            class="fas fa-caret-right"></i></button>
+                </div>
+                <div>
+                    <button id="new-task-button" class="button button--neumo button--success"><i
+                            class="fas fa-plus mr-2"></i>
+                        Nova
+                        tarefa</button>
+                </div>
+            </div>
+        </section>
+        <section id="view-container" class="card h-100 flex flex-column justify-content-between">
+
+            <div class="flex flex-column justify-center align-center h-100">
+                <i class="fas fa-user-astronaut placeholder__icon"></i>
+                <p>Selecione ou crie uma tarefa...</p>
+            </div>
+
+            <!--
+            <form id="new-task-form" action="" class="flex flex-column justify-content-between h-100">
+                                <h2 class="form__title">Nova tarefa</h2>
+                                <label for="name">name </label>
+                                <input id="owner" type="text">
+
+                                    <label for="owner">Responsável </label>
+                                    <input id="owner" type="text">
+
+                                        <label for="estimated-time">Tempo estimado</label>
+                                        <input id="estimated-time" type="text">
+
+                                            <label for="description">Descrição</label>
+                                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+
+                                            <div>
+                                                <button id="back-button" class="button button--neumo button--secondary"><i class="fas fa-arrow-left"></i></button>
+                                                <button class="button button--neumo button--success"><i class="fas fa-check mr-2"></i>
+                        Criar</button>
+                                            </div>
+            </form>
+            -->
+
+            <!--
+            <div>
+                                            <h2 id="task-name" class="card__title">Nome da tarefa</h2>
+                                            <form class="crud-form flex flex-column justify-content-between">
+                                                <div>
+                                                    <button class="button button--neumo button--warning"><i class="fas fa-edit mr-2"></i>
+                            Editar</button>
+                                                    <button class="button button--neumo button--danger ml-2"><i class="fas fa-trash"></i>
+                            Excluir</button>
+                                                </div>
+                                                <div class="ml-2">
+                                                    <small>Status:</small>
+                                                    <select name="status" id="status-select">
+                                                        <option value="1">Nova</option>
+                                                        <option value="2">Em andamento</option>
+                                                        <option value="3">Pendente</option>
+                                                        <option value="4">Finalizada</option>
+                                                    </select>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <p class="task__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus facilis dolorem odio aperiam est
+                                            velit ipsam reprehenderit temporibus expedita beatae. Beatae est ratione, nulla rem veritatis fuga natus
+                                            aliquid minima.
+                                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic ut dicta esse error at recusandae eum
+                                            officiis eos nostrum rem sint veritatis corrupti facilis, saepe sed ducimus et quasi laboriosam.
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda veritatis, autem velit quae culpa
+                                            quaerat sunt tempora nobis vitae mollitia dolores accusamus fuga, impedit doloremque numquam ratione
+                                            deserunt incidunt! Officiis!
+            </p>
+                                        <div class="container__footer flex justify-content-between">
+                                            <div>
+                                                <button class="button button--neumo button--secondary"><i class="fas fa-arrow-left"></i></button>
+                                            </div>
+                                            <div class="task__indicators flex">
+                                                <div class="card card--neumo flex flex-column">
+                                                    <span>Tempo estimado:</span><br>
+                                                        <span id="task-estimated-time mt-auto">1 hora</span>
+                    </div>
+                                                    <div class="card card--neumo ml-2 owner-container">
+                                                        <small>Responsável</small><br> <span id="task-owner" class="text--success">Nome Sobrenome</span>
+                    </div>
+                                                    </div>
+                                                </div>
+        -->
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+        integrity="sha512-F5QTlBqZlvuBEs9LQPqc1iZv2UMxcVXezbHzomzS6Df4MZMClge/8+gXrKw2fl5ysdk4rWjR0vKS7NNkfymaBQ=="
+        crossorigin="anonymous" defer></script>
+    <script src="js/main.js" defer></script>
+    </script>
+</body>
+
+</html>

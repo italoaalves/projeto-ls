@@ -1,0 +1,108 @@
+@import "reset.css";
+@import "helpers.css";
+@import "heading.css";
+@import "buttons.css";
+@import "form.css";
+@import "card.css";
+
+html {
+  scroll-behavior: smooth;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Open sans", sans-serif;
+  background-image: linear-gradient(to right bottom, #055046, #00bfa6);
+  background-size: 100vw 100vh;
+  color: #fff;
+  max-width: 100vh;
+  box-sizing: border-box;
+}
+
+header {
+  margin: 1.5rem 1rem 0;
+  height: 10vh;
+  box-sizing: border-box;
+}
+
+main {
+  box-sizing: border-box;
+  height: 86vh;
+}
+
+section {
+  padding-top: 2rem;
+}
+
+p {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.5em;
+  text-align: justify;
+}
+
+.container {
+  position: relative;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.container__footer {
+  align-items: flex-end;
+}
+
+.table-container {
+  position: relative;
+}
+
+table {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 1rem 0;
+}
+
+table thead tr th {
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+
+table tbody tr {
+  height: 3rem;
+  box-sizing: border-box;
+}
+
+table tbody tr td {
+  padding: 1rem 0.5em;
+}
+
+.status-circle {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  margin: 0 1rem;
+}
+
+.placeholder__icon {
+  font-size: 96px;
+}
+
+.task__description {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 696px) {
+  .container {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .crud-form {
+    flex-direction: row;
+  }
+}

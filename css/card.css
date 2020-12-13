@@ -1,0 +1,20 @@
+.card {
+  padding: 2em;
+  border-radius: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #343837;
+}
+
+form.card {
+  padding: 2em;
+}
+
+.card--neumo {
+  box-shadow: 0.2em 0.2em 0.4em #2b2e2d, -0.2em -0.2em 0.4em #414141;
+}
+
+h2.card__title {
+  font-size: 14px;
+  margin-bottom: 1em;
+}

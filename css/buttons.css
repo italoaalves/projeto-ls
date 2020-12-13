@@ -1,0 +1,42 @@
+.button {
+  font-size: 1em;
+  font-weight: normal;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border-radius: 15px;
+  border: none;
+  background-color: #343837;
+  cursor: pointer;
+}
+
+.button--neumo {
+  box-shadow: 0.2em 0.2em 0.4em #2b2e2d, -0.2em -0.2em 0.4em #414141;
+}
+
+.bg-primary {
+  background-color: #343837;
+}
+
+.bg-secondary {
+  background-color: #f2f2f2;
+}
+
+.button--success,
+a.button--success {
+  color: #00bfa6 !important;
+}
+
+.button--secondary,
+a.button--secondery {
+  color: #f2f2f2 !important;
+}
+
+.button--warning,
+a.button--warning {
+  color: #f8d559 !important;
+}
+
+.button--danger,
+a.button--danger {
+  color: #f87f59 !important;
+}
