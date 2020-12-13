@@ -1,3 +1,5 @@
+const base_url = "https://rocketeer-api.herokuapp.com/tasks";
+
 const viewContainer = document.querySelector("#view-container");
 const tableBody = document
   .querySelectorAll("table")[0]
@@ -15,50 +17,12 @@ const statusColors = {
 
 let taskList = [];
 
-class Task {
-  constructor(name, description, owner, estimatedTime) {
-    this.id = getID();
-    this.name = name;
-    this.description = description;
-    this.owner = owner;
-    this.estimatedTime = estimatedTime;
-    this.status = "Nova";
-
-    this.template = document.createElement("tr");
-
-    let tdID = document.createElement("td");
-    let tdName = document.createElement("td");
-    let tdStatus = document.createElement("td");
-    let tdActions = parseHTML("<td></td >");
-    tdActions = tdActions.querySelector("td");
-
-    let editButton = parseHTML(
-      `<button class="button button--neumo button--warning edit-button mr-2"><i class="fas fa-edit"></i></button>`
-    );
-    let deleteButton = parseHTML(
-      `<button class="button button--neumo button--danger delete-button mr-2"><i class="fas fa-trash"></i></button>`
-    );
-    let viewButton = parseHTML(
-      `<button class="button button--neumo button--secondary view-button"><i class="fas fa-eye"></i></button>`
-    );
-
-    tdName.innerText = this.name;
-
-    tdStatus.innerHTML = '<i class="fas fa-circle"></i >';
-    tdStatus.classList.add("status-circle");
-    tdStatus.style.color = statusColors[this.status];
-
-    tdActions.appendChild(editButton);
-    tdActions.appendChild(deleteButton);
-    tdActions.appendChild(viewButton);
-
-    tdID.innerText = this.id;
-
-    this.template.appendChild(tdID);
-    this.template.appendChild(tdName);
-    this.template.appendChild(tdStatus);
-    this.template.appendChild(tdActions);
-  }
+async function updateList() {
+  await fetch(base_url)
+    .then((response) => response.json())
+    .then((json) => {
+      taskList.push(...json);
+    });
 }
 
 function getID() {
@@ -80,7 +44,43 @@ function clearView() {
 
 function updateTable() {
   for (let task of taskList) {
-    tableBody.append(task.template);
+    template = document.createElement("tr");
+
+    let tdID = document.createElement("td");
+    let tdName = document.createElement("td");
+    let tdStatus = document.createElement("td");
+    let tdActions = parseHTML("<td></td >");
+    tdActions = tdActions.querySelector("td");
+
+    let editButton = parseHTML(
+      `<button class="button button--neumo button--warning edit-button mr-2"><i class="fas fa-edit"></i></button>`
+    );
+    let deleteButton = parseHTML(
+      `<button class="button button--neumo button--danger delete-button mr-2"><i class="fas fa-trash"></i></button>`
+    );
+    let viewButton = parseHTML(
+      `<button class="button button--neumo button--secondary view-button"><i class="fas fa-eye"></i></button>`
+    );
+
+    tdName.innerText = task.name;
+
+    tdStatus.innerHTML = '<i class="fas fa-circle"></i >';
+    tdStatus.classList.add("status-circle");
+    tdStatus.style.color = statusColors[task.status];
+
+    tdActions.appendChild(editButton);
+    tdActions.appendChild(deleteButton);
+    tdActions.appendChild(viewButton);
+
+    tdID.innerText = task.id;
+
+    template.appendChild(tdID);
+    template.appendChild(tdName);
+    template.appendChild(tdStatus);
+    template.appendChild(tdActions);
+
+    console.log(template);
+    tableBody.append(template);
   }
 }
 
@@ -108,17 +108,30 @@ addButton.addEventListener("click", function () {
     let taskOwner = taskForm.querySelector("#owner");
     let taskDescription = taskForm.querySelector("#description");
 
-    task = new Task(
-      taskName.value,
-      taskDescription.value,
-      taskOwner.value,
-      taskEstimatedTime.value
-    );
+    (async () => {
+      const rawResponse = await fetch(base_url, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: taskName.value,
+          description: taskDescription.value,
+          owner: taskOwner.value,
+          estimatedTime: taskEstimatedTime.value,
+          status: "Nova",
+        }),
+      });
+      const content = await rawResponse.json();
 
-    taskList.push(task);
+      console.log(content);
+    })();
 
     clearView();
+    updateList();
     updateTable();
-    console.log(deleteButtons);
   });
 });
+
+updateList().then(updateTable());
