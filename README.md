@@ -1,4 +1,4 @@
-# Especificação do projeto
+# Rocketeer - gerenciador de tarefas
 
 ## Introdução e Objetivo 📚
 
@@ -13,7 +13,7 @@ Então para a escolha do tema sugiro que sejam formadas equipes com no máximo t
 Depois de escolhido o tema, todos os projetos devem declarar suas propostas neste jamboard seguindo esse formato de nota:
 
 ### Descrição:
-Resumidamente descreva a ideia central do seu projeto
+A aplicação consiste em um gerenciador de tarefas simples integrado a uma API REST.
 
 ### Equipe:
 - Anderson Lima
