@@ -1,6 +1,6 @@
 # Especificação do projeto
 
-##Introdução e Objetivo 📚
+## Introdução e Objetivo 📚
 
 A disciplina de LS tem como objetivo principal fazer com que os alunos compreendam como se desenvolve uma aplicação Web. Por isso, que em sua trajetória são apresentadas inúmeras tecnologias que compõem camada Front-end de uma aplicação Web. Contudo, muitas vezes devido a vasta extensão de temas é impraticável expor todos os detalhes em um único projeto ou exercício em sala de aula.
 Então, através desse projeto o aluno vai poder praticar os conceitos vistos em sala de aula, e alguns pontos extras definidos mais adiante, de tal maneira que no final se obtenha uma aplicação Web mais sólida e robusta.
@@ -20,3 +20,6 @@ Resumidamente descreva a ideia central do seu projeto
 - Felipe Galdino
 - Ítalo Alves
 - Micael Pinheiro
+
+## API 
+[Repositório da API](https://github.com/micaelps/rocketeer-api)
