@@ -1,4 +1,4 @@
-const base_url = "https://rocketeer-api.herokuapp.com/tasks";
+const base_url = "https://rocketeer-api.herokuapp.com/tasks/";
 
 const viewContainer = document.querySelector("#view-container");
 const tableBody = document
@@ -8,6 +8,9 @@ const addButton = document.querySelector("#new-task-button");
 let backButton = null;
 let saveButton = null;
 
+let searchInput = document.querySelector("#search-input");
+let filterKeyword = null;
+
 const statusColors = {
   Nova: "#00bfa6",
   "Em andamento": "#f8d559",
@@ -15,15 +18,17 @@ const statusColors = {
   Finalizada: "#f2f2f2",
 };
 
-let taskList = [];
-
 async function updateList() {
   await fetch(base_url)
     .then((response) => response.json())
     .then((json) => {
-      taskList.push(...json);
-      updateTable(taskList);
-      console.log(taskList);
+      if (filterKeyword) {
+        const regex = new RegExp(filterKeyword, "g");
+        filtered = json.filter(({ name }) => name.match(regex));
+        updateTable(filtered);
+      } else {
+        updateTable(json);
+      }
     });
 }
 
@@ -45,7 +50,7 @@ function clearView() {
 }
 
 function updateTable(taskList) {
-  console.log(taskList);
+  tableBody.innerHTML = "";
   for (let task of taskList) {
     template = document.createElement("tr");
 
@@ -54,14 +59,11 @@ function updateTable(taskList) {
     let tdActions = parseHTML("<td></td >");
     tdActions = tdActions.querySelector("td");
 
-    let editButton = parseHTML(
-      `<button class="button button--neumo button--warning edit-button mr-2"><i class="fas fa-edit"></i></button>`
-    );
     let deleteButton = parseHTML(
-      `<button class="button button--neumo button--danger delete-button mr-2"><i class="fas fa-trash"></i></button>`
+      `<button onClick='deleteTask("${task.id}")' class="button button--neumo button--danger delete-button mr-2"><i class="fas fa-trash"></i></button>`
     );
     let viewButton = parseHTML(
-      `<button class="button button--neumo button--secondary view-button"><i class="fas fa-eye"></i></button>`
+      `<button onClick='showTask("${task.id}")' class="button button--neumo button--secondary view-button"><i class="fas fa-eye"></i></button>`
     );
 
     tdName.innerText = task.name;
@@ -70,7 +72,6 @@ function updateTable(taskList) {
     tdStatus.classList.add("status-circle");
     tdStatus.style.color = statusColors[task.status];
 
-    tdActions.appendChild(editButton);
     tdActions.appendChild(deleteButton);
     tdActions.appendChild(viewButton);
 
@@ -78,7 +79,6 @@ function updateTable(taskList) {
     template.appendChild(tdStatus);
     template.appendChild(tdActions);
 
-    console.log(template);
     tableBody.append(template);
   }
 }
@@ -125,11 +125,97 @@ addButton.addEventListener("click", function () {
       const content = await rawResponse.json();
 
       console.log(content);
-    })();
-
-    clearView();
-    updateList();
+    })().then(() => {
+      clearView();
+      updateList();
+    });
   });
+});
+
+async function deleteTask(id) {
+  if (confirm("Você realmente quer excluir?")) {
+    await fetch(base_url + id, {
+      method: "DELETE",
+    })
+      .then((res) => res.text()) // or res.json()
+      .then(() => {
+        clearView();
+        updateList();
+      });
+  }
+}
+
+async function showTask(id) {
+  fetch(base_url + id)
+    .then((response) => response.json())
+    .then((task) => {
+      viewContainer.innerHTML = "";
+
+      taskForm = parseHTML(
+        `<form id="new-task-form" class="flex flex-column justify-content-between h-100">
+            <h2 class="form__title">Nova tarefa</h2>
+            <label for="name" class="m-2">Nome </label>
+            <input id="name" type="text" value='${task.name}' class="m-2">
+            <label for="owner" class="m-2">Responsável </label>
+            <input id="owner" type="text" value='${task.owner}' class="m-2">
+            <label for="estimated-time">Tempo estimado</label>
+            <input id="estimated-time" type="text" value='${task.estimatedTime}'>
+            <label for="description">Descrição</label>
+            <textarea name="description" id="description" cols="30" rows="10">${task.description}</textarea>
+            <div>
+            <button id="back-button" class="button button--neumo button--secondary"><i class="fas fa-arrow-left"></i></button>
+            <button id="save-task-button" class="button button--neumo button--success"><i class="fas fa-check mr-2"></i>Salvar</button>
+            </div>
+           </form>`
+      );
+      viewContainer.appendChild(taskForm);
+
+      backButton = document.querySelector("#back-button");
+      backButton.addEventListener("click", clearView);
+
+      saveButton = document.querySelector("#save-task-button");
+      saveButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        let taskForm = document.querySelector("#new-task-form");
+        let taskName = taskForm.querySelector("#name");
+        let taskEstimatedTime = taskForm.querySelector("#estimated-time");
+        let taskOwner = taskForm.querySelector("#owner");
+        let taskDescription = taskForm.querySelector("#description");
+
+        (async () => {
+          const rawResponse = await fetch(base_url + id, {
+            method: "PUT",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: taskName.value,
+              description: taskDescription.value,
+              owner: taskOwner.value,
+              estimatedTime: taskEstimatedTime.value,
+              status: "Nova",
+            }),
+          });
+          const content = await rawResponse.json();
+
+          console.log(content);
+        })().then(() => {
+          clearView();
+          updateList();
+        });
+      });
+    });
+}
+
+searchInput.addEventListener("input", () => {
+  if (searchInput.value != "") {
+    filterKeyword = searchInput.value;
+    updateList();
+  } else {
+    filterKeyword = null;
+    updateList();
+  }
 });
 
 updateList();

@@ -29,8 +29,8 @@
                 <h2 class="tasks__title">Tarefas:</h2>
                 <form id="search-form" action="" class="flex justify-content-end">
                     <input id="search-input" type="text" placeholder="busca">
-                    <button id="search-button" type="submit" class="button button--neumo button--secondary ml-2"><i
-                            class="fas fa-search"></i></button>
+                    <button disabled id="search-button" type="submit"
+                        class="button button--neumo button--secondary ml-2"><i class="fas fa-search"></i></button>
                 </form>
 
             </div>
@@ -48,13 +48,6 @@
             </table>
 
             <div class="container__footer flex justify-content-between mt-auto">
-                <div class="pagination">
-                    <button id="previous-button" class="button button--neumo button--secondary"><i
-                            class="fas fa-caret-left"></i></button>
-                    <span class="page-indicator"> 1 </span>
-                    <button id="next-button" class="button button--neumo button--secondary"><i
-                            class="fas fa-caret-right"></i></button>
-                </div>
                 <div>
                     <button id="new-task-button" class="button button--neumo button--success"><i
                             class="fas fa-plus mr-2"></i>
@@ -92,54 +85,6 @@
                                             </div>
             </form>
             -->
-
-            <!--
-            <div>
-                                            <h2 id="task-name" class="card__title">Nome da tarefa</h2>
-                                            <form class="crud-form flex flex-column justify-content-between">
-                                                <div>
-                                                    <button class="button button--neumo button--warning"><i class="fas fa-edit mr-2"></i>
-                            Editar</button>
-                                                    <button class="button button--neumo button--danger ml-2"><i class="fas fa-trash"></i>
-                            Excluir</button>
-                                                </div>
-                                                <div class="ml-2">
-                                                    <small>Status:</small>
-                                                    <select name="status" id="status-select">
-                                                        <option value="1">Nova</option>
-                                                        <option value="2">Em andamento</option>
-                                                        <option value="3">Pendente</option>
-                                                        <option value="4">Finalizada</option>
-                                                    </select>
-                                                </div>
-
-                                            </form>
-                                        </div>
-                                        <p class="task__description">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus facilis dolorem odio aperiam est
-                                            velit ipsam reprehenderit temporibus expedita beatae. Beatae est ratione, nulla rem veritatis fuga natus
-                                            aliquid minima.
-                                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic ut dicta esse error at recusandae eum
-                                            officiis eos nostrum rem sint veritatis corrupti facilis, saepe sed ducimus et quasi laboriosam.
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda veritatis, autem velit quae culpa
-                                            quaerat sunt tempora nobis vitae mollitia dolores accusamus fuga, impedit doloremque numquam ratione
-                                            deserunt incidunt! Officiis!
-            </p>
-                                        <div class="container__footer flex justify-content-between">
-                                            <div>
-                                                <button class="button button--neumo button--secondary"><i class="fas fa-arrow-left"></i></button>
-                                            </div>
-                                            <div class="task__indicators flex">
-                                                <div class="card card--neumo flex flex-column">
-                                                    <span>Tempo estimado:</span><br>
-                                                        <span id="task-estimated-time mt-auto">1 hora</span>
-                    </div>
-                                                    <div class="card card--neumo ml-2 owner-container">
-                                                        <small>Responsável</small><br> <span id="task-owner" class="text--success">Nome Sobrenome</span>
-                    </div>
-                                                    </div>
-                                                </div>
-        -->
         </section>
     </main>
 

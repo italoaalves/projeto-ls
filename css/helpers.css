@@ -14,11 +14,15 @@
   margin-top: auto;
 }
 
+.mt-2 {
+  margin-top: 2em;
+}
+
 .ml-2 {
   margin-left: 2em;
 }
 
-.m3-2 {
+.mr-2 {
   margin-right: 2em;
 }
 

@@ -7,14 +7,16 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   font-family: "Open sans", sans-serif;
-  background-image: linear-gradient(to right bottom, #055046, #00bfa6);
   color: #fff;
   max-width: 100vh;
   box-sizing: border-box;
+  background-image: linear-gradient(to right bottom, #055046, #00bfa6);
+  background-size: 200% 200%;
 }
 
 header {
